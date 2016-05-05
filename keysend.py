@@ -9,6 +9,12 @@ CHANNEL = "#_test"
 
 slack = Slacker(os.environ['SLACK_API_TOKEN'])
 
+def remove(filename):
+    try:
+        os.remove(filename)
+    except FileNotFoundError as e:
+        pass
+
 def compress(filename, files, compression="xz"):
     mode = "x:" + compression
     with tarfile.open(filename, mode=mode) as tar:
@@ -28,7 +34,7 @@ if __name__ == "__main__":
     in_files = sys.argv[2:]
 
     # Compress all the files passed in
-    compressed_file = "message.tar.xz"
+    compressed_file = "/tmp/message.tar.xz"
     compress(compressed_file, in_files)
 
     # Encrypt the compressed archive
@@ -37,3 +43,7 @@ if __name__ == "__main__":
 
     # Send encrypted, compressed file to slack channel
     upload_file(out_file)
+
+    # Cleanup files
+    remove(compressed_file)
+    remove(out_file)
