@@ -1,0 +1,40 @@
+* Keysend
+
+** TODOs
+*** TODO Read from stdin (maybe use a flag?)
+*** TODO Add sending to individual people
+
+** CLI commands
+
+*keysend [keybase_username] [-cd] [-C channel || -u slack_username] [-f outfile_name] [file ... || message ]*
+
+# compress two files and send the encrypted zip to #devchat slack channel
+# compress for tmd
+keysend tmd -c -C="#devchat" hello.txt start.txt
+
+# compress a message and send to #general
+keysend tmd "taco"
+
+*** Flags
+
+    # Maybe wait to add this
+    - *-d Decrypt*
+      - Sets keysend up to decrypt a file.
+
+    - *-C=<channel>*
+      - Specify which channel you want the keybase message sent to.
+        Defaults to '#general'.
+
+    - *-u=<username>*
+      - Specify the user you want to send the encrypted file to.
+        This cannot be use in conjunction with *channel*.
+        If both are specified then it will throw an error.
+
+    - *-f=<filename>*
+      - Specify the name of the encrypted file to send over. 
+        Defaults to "message.zip.encrypted". 
+        If the *-d* flag is used then this specifies the filename to be decrytped
+
+** Future ideas
+
+- config.yml file that specifies slack api token, default channel to post to, etc
