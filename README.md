@@ -2,7 +2,7 @@
 
 Compress, encrypt, and send files easily using keybase and slack.
 
-The process consists of compression a list of file names with tar and xz. Then the compressed files are encrypted using keybase for a specific user. This encrypted file is then passed up to slack.
+The process consists of compression a list of file names with zip. Then the compressed files are encrypted using keybase for a specific user. This encrypted file is then passed up to slack.
 
 ## Getting Started
 
@@ -23,5 +23,5 @@ export SLACK_API_TOKEN=xxx000000sssss
 To send some files:
 
 ```shell
-python keysend.py tmd secrets/*
+python keysend.py <keybase_id> -C "#devchat" secrets/*
 ```
